@@ -2,4 +2,6 @@
     <string name="app_name">Olive Dolphin Prophecy</string>
     <string name="challenge_luck">Challenge Luck</string>
     <string name="fortunas_telling">The answer is</string>
+    <string name="yes_image_title">Oh yes please</string>
+    <string name="no_image_title">Oh god no</string>
 </resources>

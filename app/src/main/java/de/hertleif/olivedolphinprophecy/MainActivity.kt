@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun triggerFortuna(view: View) {
+    fun triggerFortuna(_view: View) {
         startActivity(Intent(this, DisplayFortuneActivity::class.java))
     }
 }
