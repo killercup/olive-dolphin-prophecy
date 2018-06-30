@@ -16,7 +16,11 @@ class DisplayFortuneActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.yes).visibility = visible(yes)
         findViewById<ImageView>(R.id.no).visibility = visible(!yes)
 
-        findViewById<ConstraintLayout>(R.id.fortunas_telling).setBackgroundColor(Color.BLACK)
+        if (yes) {
+            findViewById<ConstraintLayout>(R.id.fortunas_telling).setBackgroundColor(Color.WHITE)
+        } else {
+            findViewById<ConstraintLayout>(R.id.fortunas_telling).setBackgroundColor(Color.BLACK)
+        }
     }
 
     fun visible(yes: Boolean): Int {
