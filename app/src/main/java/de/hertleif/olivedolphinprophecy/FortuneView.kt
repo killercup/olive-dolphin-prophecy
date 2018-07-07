@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -38,7 +37,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         if (canvas == null) {
-            Log.d(TAG, "no canvas :O")
+            //Log.d(TAG, "no canvas :O")
             return
         }
 
@@ -82,7 +81,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
 
     private fun calcTexts(width: Int, height: Int) {
         if (previousHeight == height && previousWidth == width && texts.size > 0) {
-            Log.d(TAG, "no text changes, skipping")
+            //Log.d(TAG, "no text changes, skipping")
             return
         }
 
@@ -97,7 +96,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
             try {
                 textView = newText(text, fortune, maxWidth, maxHeight - textsHeight)
             } catch (e: NoMoreSpaceException) {
-                Log.d(TAG, "no more space :(", e)
+                //Log.d(TAG, "no more space :(", e)
                 break
             }
             textCount += 1
@@ -105,7 +104,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
             texts.add(textView)
         }
 
-        Log.d(TAG, "done, added $textCount texts")
+        //Log.d(TAG, "done, added $textCount texts")
     }
 
     private fun newText(content: String, style: Outcome, maxWidth: Int, maxHeight: Int): FortuneText {
@@ -155,7 +154,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
         fun autoSize(maxWidth: Int, maxHeight: Int): FortuneText {
             fontSize = Math.min(maxFontSize, maxHeight.toFloat())
             while (fontSize >= minFontSize) {
-                Log.d(TAG, "autoSize with $fontSize")
+                //Log.d(TAG, "autoSize with $fontSize")
                 textPaint.textSize = fontSize
 
                 //val w = textPaint.measureText(content)
@@ -165,18 +164,18 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
                 val w = textBounds.width()
                 val h = Math.max(textBounds.height(), fontSize.roundToInt())
 
-                Log.d(TAG, "autoSize with font size $fontSize gives us a $w x $h box (max is $maxWidth x $maxHeight)")
+                //Log.d(TAG, "autoSize with font size $fontSize gives us a $w x $h box (max is $maxWidth x $maxHeight)")
                 if (w <= maxWidth && height() <= maxHeight) {
                     centerOffset = (maxWidth - w) / 2f
                     height = h + 0
 
-                    Log.d(TAG, "$fontSize looks good, using that")
+                    //Log.d(TAG, "$fontSize looks good, using that")
                     return this
                 } else {
                     fontSize -= 1
                 }
             }
-            Log.d(TAG, "autoSize gives up")
+            //Log.d(TAG, "autoSize gives up")
             throw NoMoreSpaceException()
         }
 
@@ -185,7 +184,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
         }
 
         fun draw(canvas: Canvas, left: Float, top: Float) {
-            Log.d(TAG, "drawing '$content' at ${left + centerOffset},$top with a height of ${height()}")
+            //Log.d(TAG, "drawing '$content' at ${left + centerOffset},$top with a height of ${height()}")
             canvas.drawText(content, left + centerOffset, top + height(), textPaint)
         }
     }
