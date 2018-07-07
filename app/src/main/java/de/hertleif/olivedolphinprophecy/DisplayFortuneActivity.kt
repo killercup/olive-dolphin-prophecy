@@ -4,31 +4,31 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
-import android.widget.ImageView
 
 class DisplayFortuneActivity : AppCompatActivity() {
+    private val TAG = "OlDolPro.Fortune"
+    private var fortune = Outcome.Yes
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_fortune)
+        val container = findViewById<ConstraintLayout>(R.id.container)
 
         val yes = Math.random() < 0.5
-        findViewById<ImageView>(R.id.yes).visibility = visible(yes)
-        findViewById<ImageView>(R.id.no).visibility = visible(!yes)
 
-        if (yes) {
-            findViewById<ConstraintLayout>(R.id.fortunas_telling).setBackgroundColor(Color.WHITE)
+        container.setBackgroundColor(if (yes) {
+            Color.WHITE
         } else {
-            findViewById<ConstraintLayout>(R.id.fortunas_telling).setBackgroundColor(Color.BLACK)
+            Color.BLACK
+        })
+        this.fortune = if (yes) {
+            Outcome.Yes
+        } else {
+            Outcome.No
         }
-    }
 
-    fun visible(yes: Boolean): Int {
-        return if (yes) {
-            ImageView.VISIBLE
-        } else {
-            ImageView.INVISIBLE
-        }
+        val textCanvas = findViewById<FortunateView>(R.id.fortunas_telling)
+        textCanvas.setStyle(fortune)
     }
 }
 

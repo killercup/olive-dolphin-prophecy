@@ -2,34 +2,18 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fortunas_telling"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DisplayFortuneActivity">
 
-    <ImageView
-        android:id="@+id/yes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="24dip"
-        android:contentDescription="@string/yes_image_title"
-        android:visibility="invisible"
+    <de.hertleif.olivedolphinprophecy.FortunateView
+        android:id="@+id/fortunas_telling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:padding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_yes" />
-
-    <ImageView
-        android:id="@+id/no"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="24dip"
-        android:contentDescription="@string/no_image_title"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_no" />
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
