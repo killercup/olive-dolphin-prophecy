@@ -9,8 +9,11 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import kotlin.math.roundToInt
+
 
 class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val TAG = "OlDolPro.FortuneView"
@@ -41,10 +44,39 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
 
         calcTexts(canvas.width, canvas.height)
 
-        var textsHeight = padding //+ top + paddingTop + topPaddingOffset
-        for (textView in texts.shuffled()) {
+        var textsHeight = 0 //+ top + paddingTop + topPaddingOffset
+        for (textView in texts) {
             textView.draw(canvas, padding.toFloat(), textsHeight.toFloat())
             textsHeight += textView.height() + lineSpacing
+        }
+    }
+
+    private val gestureDetector: GestureDetector
+
+    init {
+        this.gestureDetector = GestureDetector(getContext(), GestureListener())
+    }
+
+    private var onTouchCallback: (() -> Unit)? = null
+
+    fun setOnTouchCallback(fn: (() -> Unit)) {
+        this.onTouchCallback = fn
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        var result = gestureDetector.onTouchEvent(event)
+        if (!result && event != null) {
+            if (event.action === MotionEvent.ACTION_UP) {
+                onTouchCallback?.invoke()
+                result = true
+            }
+        }
+        return result
+    }
+
+    internal inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+        override fun onDown(e: MotionEvent): Boolean {
+            return true
         }
     }
 
@@ -54,7 +86,7 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
             return
         }
 
-        val maxHeight = height - (2 * padding)
+        val maxHeight = height - padding
         val maxWidth = width - (2 * padding)
 
         var textsHeight = 0
