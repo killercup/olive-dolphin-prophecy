@@ -12,6 +12,8 @@
         android:layout_height="0dp"
         android:layout_margin="0dp"
         android:background="@color/colorPrimary"
+        android:backgroundTint="@android:color/transparent"
+        android:backgroundTintMode="src_over"
         android:onClick="triggerFortuna"
         android:padding="24dip"
         app:layout_constraintBottom_toBottomOf="parent"
