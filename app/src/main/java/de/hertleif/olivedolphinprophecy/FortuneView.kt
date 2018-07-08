@@ -15,8 +15,7 @@ import kotlin.math.roundToInt
 
 
 class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs) {
-    var fortune: Outcome = Outcome.Yes
-
+    private var fortune: Outcome = Outcome.Yes
     private var texts: ArrayList<FortuneText> = arrayListOf()
     private var previousWidth = 0
     private var previousHeight = 0
@@ -63,18 +62,24 @@ class FortunateView(context: Context, attrs: AttributeSet) : View(context, attrs
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         var result = gestureDetector.onTouchEvent(event)
         if (!result && event != null) {
-            if (event.action === MotionEvent.ACTION_UP) {
-                onTouchCallback?.invoke()
+            if (event.action == MotionEvent.ACTION_UP) {
+                performClick()
                 result = true
             }
         }
         return result
     }
 
+    override fun performClick(): Boolean {
+        onTouchCallback?.invoke()
+        return super.performClick()
+    }
+
     internal inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         override fun onDown(e: MotionEvent): Boolean {
             return true
         }
+
     }
 
     private fun calcTexts(width: Int, height: Int) {
