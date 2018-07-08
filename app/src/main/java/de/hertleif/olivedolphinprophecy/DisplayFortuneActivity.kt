@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 
 class DisplayFortuneActivity : AppCompatActivity() {
-    private val TAG = "OlDolPro.FortuneAct"
     private var fortune = Outcome.Yes
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +36,8 @@ class DisplayFortuneActivity : AppCompatActivity() {
         val textCanvas = findViewById<FortunateView>(R.id.fortunas_telling)
         textCanvas.setStyle(fortune)
         textCanvas.setOnTouchCallback {
-            //Log.d(TAG, "tapped on canvas, closing activity")
             finish()
         }
     }
-
-
 }
 
